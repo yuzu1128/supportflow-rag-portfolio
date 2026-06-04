@@ -53,6 +53,8 @@ Open:
 
 The default `.env.example` uses `LLM_PROVIDER=mock` so the app can start without an API key. For a real model, set either OpenRouter or Ollama.
 
+If those ports are already in use, change `BACKEND_PORT`, `FRONTEND_PORT`, and `VITE_API_BASE_URL` in `.env` before rebuilding. Example: `BACKEND_PORT=8011`, `FRONTEND_PORT=5179`, `VITE_API_BASE_URL=http://localhost:8011/api`.
+
 ## LLM Modes
 
 ### OpenRouter
