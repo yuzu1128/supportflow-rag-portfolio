@@ -10,8 +10,8 @@ The demo should run with Docker Compose and expose:
 
 - FastAPI backend
 - React/Vite frontend
-- Chroma vector store
 - SQLite metadata and query log database
+- Deterministic retrieval index behind a vector-store-ready interface
 - Optional OpenRouter provider
 - Optional Ollama local provider
 
@@ -124,4 +124,4 @@ Common demo failures and expected response:
 
 ## Caveats
 
-The sample PDF and DOCX sources are text placeholders, not binary documents. This is intentional for a lightweight portfolio repository. A production system would use validated parsers and malware scanning before indexing binary uploads.
+The sample corpus includes lightweight PDF and DOCX files, plus text sidecars for deterministic evaluation and review. A production system would use validated parsers and malware scanning before indexing binary uploads.

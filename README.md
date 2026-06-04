@@ -21,6 +21,10 @@ It demonstrates document ingestion, hybrid retrieval, grounded answer generation
 
 The live RAG API is intentionally not hosted permanently. This avoids maintenance cost and API billing risk.
 
+Live presentation:
+
+- https://supportflow-rag-portfolio.pages.dev
+
 Recommended portfolio flow:
 
 - Cloudflare Pages hosts the one-page HTML explanation in `presentation/`.

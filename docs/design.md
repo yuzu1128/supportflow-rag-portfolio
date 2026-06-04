@@ -34,7 +34,7 @@ The corpus intentionally avoids unrelated business topics and focuses on support
 - Production customer deployment.
 - Always-on hosted LLM API service.
 - Authentication beyond demo-safe local access.
-- Full binary parsing fidelity for PDF and DOCX. The sample corpus includes lightweight text placeholders for those formats.
+- Full enterprise-grade binary ingestion for arbitrary PDF and DOCX uploads. The sample corpus includes lightweight PDF/DOCX files and text sidecars for deterministic review.
 - A full reranker, fine-tuned model, or enterprise observability stack.
 
 ## Architecture
@@ -57,9 +57,9 @@ The FastAPI backend should own ingestion, retrieval, answer generation, logs, an
 
 Expected modules:
 
-- Document loading for Markdown, TXT, CSV, JSON, and placeholder text files representing PDF/DOCX sources.
+- Document loading for Markdown, TXT, CSV, JSON, PDF, and DOCX sources.
 - Chunking with source path, category, title, source ID, and section metadata.
-- Vector retrieval through Chroma.
+- Retrieval behind a vector-store-ready interface. The local demo uses deterministic scoring to avoid model/API costs; production can swap in Chroma, OpenSearch, or pgvector.
 - Keyword retrieval for exact terms such as `AUTH_401`, `RATE_429`, `message.created`, and endpoint paths.
 - Hybrid result merge and score normalization.
 - Prompt construction with retrieved context.
@@ -74,7 +74,7 @@ Hybrid retrieval is important because the corpus mixes prose, tables, JSON, CSV,
 Recommended retrieval flow:
 
 1. Normalize the user query.
-2. Run vector search against Chroma.
+2. Run retrieval through the search-index abstraction.
 3. Run keyword search over chunk text and metadata.
 4. Merge results by source ID and chunk ID.
 5. Prefer exact named-entity matches for API codes, endpoint paths, webhook event names, and role names.

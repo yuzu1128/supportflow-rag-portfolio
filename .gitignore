@@ -11,4 +11,5 @@ dist/
 *.db
 *.sqlite
 *.log
+.wrangler/
 .DS_Store

@@ -27,7 +27,7 @@ flowchart TB
 | --- | --- | --- |
 | React/Vite frontend | S3 + CloudFront | Static hosting with cache invalidation on release. |
 | FastAPI backend | ECS Fargate behind ALB | Predictable container runtime and simple scaling. |
-| Chroma | OpenSearch Serverless or PostgreSQL pgvector | Chroma remains fine for local demo; production should use managed persistence. |
+| Local retrieval index | OpenSearch Serverless or PostgreSQL pgvector | The portfolio keeps local search lightweight; production should use managed persistence and embedding search. |
 | SQLite logs | RDS PostgreSQL | Durable query logs, evaluations, and document metadata. |
 | sample_docs folder | S3 document bucket | Versioned source documents and ingestion events. |
 | OpenRouter/Ollama settings | Secrets Manager and Parameter Store | Keep provider keys and model configuration out of code. |
