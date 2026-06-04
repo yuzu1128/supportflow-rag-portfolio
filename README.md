@@ -96,6 +96,20 @@ presentation/  Screen-share HTML explanation for Cloudflare Pages
 
 ## Test Commands
 
+Docker smoke test:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\docker_smoke_test.ps1
+```
+
+If the images are already built and containers are already running:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\docker_smoke_test.ps1 -SkipBuild
+```
+
+The smoke test checks Docker Compose config, starts the app, waits for backend health, verifies the frontend, calls the Ask API, and runs the evaluation dataset.
+
 Backend:
 
 ```bash

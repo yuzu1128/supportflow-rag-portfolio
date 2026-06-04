@@ -118,6 +118,7 @@ Common demo failures and expected response:
 - Sample corpus has 30 to 50 documents.
 - QA dataset has 30 to 50 cases.
 - Evaluation report is updated after the latest run.
+- Docker smoke test passes through `scripts/docker_smoke_test.ps1`.
 - UI shows local/demo environment status.
 - Static presentation page opens without generated screenshots.
 - README links to design, AWS architecture, operations, evaluation report, and presentation.
