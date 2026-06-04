@@ -1,0 +1,20 @@
+Source ID: api-rate-limits
+Title: API Rate Limits
+
+Default tenant limit:
+600 requests per minute across the REST API.
+
+Burst behavior:
+Short bursts are allowed up to 100 requests in 10 seconds. Sustained traffic above the minute limit returns RATE_429.
+
+Headers:
+- X-RateLimit-Limit
+- X-RateLimit-Remaining
+- X-RateLimit-Reset
+- Retry-After
+
+Webhook retries:
+Webhook retries do not count against customer REST API limits.
+
+Recommended handling:
+Use exponential backoff with jitter. Do not retry VALIDATION_422 without changing the request body. Safe retries require idempotency keys when creating conversations.

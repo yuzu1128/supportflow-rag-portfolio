@@ -1,0 +1,15 @@
+Source ID: release-2026-03
+Title: Release Notes March 2026
+
+Highlights:
+- Added webhook delivery dashboard with retry backlog age and failed endpoint counts.
+- Added not helpful feedback for article suggestions.
+- Added role-based export controls for internal notes.
+
+Fixes:
+- Resolved a bug where Waiting on customer state did not pause timers for queues that explicitly enabled customer-wait pauses.
+- Improved CONV_404 error text when a conversation was merged.
+- Reduced duplicate article suggestions for imported Markdown files.
+
+Known issue:
+Search relevance reports may lag by up to 20 minutes during large import batches.

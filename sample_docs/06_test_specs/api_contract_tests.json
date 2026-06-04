@@ -1,0 +1,30 @@
+{
+  "source_id": "test-api-contracts",
+  "title": "API Contract Test Spec",
+  "tests": [
+    {
+      "name": "create_conversation_requires_idempotency_key",
+      "endpoint": "POST /v1/conversations",
+      "expected_status": 422,
+      "expected_error": "VALIDATION_422"
+    },
+    {
+      "name": "create_conversation_duplicate_idempotency_returns_original",
+      "endpoint": "POST /v1/conversations",
+      "expected_status": 200,
+      "assertion": "same conversation_id is returned"
+    },
+    {
+      "name": "missing_api_key_returns_auth_401",
+      "endpoint": "GET /v1/conversations/{conversation_id}",
+      "expected_status": 401,
+      "expected_error": "AUTH_401"
+    },
+    {
+      "name": "rate_limit_returns_headers",
+      "endpoint": "GET /v1/conversations/{conversation_id}",
+      "expected_status": 429,
+      "expected_error": "RATE_429"
+    }
+  ]
+}

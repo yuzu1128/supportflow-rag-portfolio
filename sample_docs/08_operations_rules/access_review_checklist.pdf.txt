@@ -1,0 +1,16 @@
+Placeholder for PDF source: Quarterly Access Review Checklist
+Source ID: ops-access-review-checklist
+
+This text file represents a lightweight PDF source for ingestion tests.
+
+Checklist:
+- Export current users by role.
+- Confirm every Support Admin still needs admin access.
+- Confirm API key owners are active team members.
+- Remove users who no longer handle SupportFlow inquiries.
+- Verify Read Only Analysts cannot reply or change inquiry state.
+- Review recent export events for unusual access patterns.
+- Record completion in the audit log.
+
+Completion rule:
+Access review is complete only when all exceptions have an owner role and due date.

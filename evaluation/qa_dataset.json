@@ -1,0 +1,327 @@
+{
+  "dataset_name": "supportflow_rag_portfolio_qa",
+  "version": "2026-06-04",
+  "description": "Evaluation cases for the SupportFlow inquiry-management SaaS RAG portfolio. Cases cover direct lookup, cross-document synthesis, API/error named entities, unanswerable questions, and vague or paraphrased user questions.",
+  "cases": [
+    {
+      "id": "qa-001",
+      "category": "simple_lookup",
+      "question": "What are the possible inquiry states in the Agent Workspace?",
+      "expected_answer": "New, Open, Waiting on customer, Waiting on engineering, Resolved, and Reopened.",
+      "expected_sources": ["sample_docs/01_user_manual/agent_workspace_guide.md"],
+      "expected_keywords": ["New", "Open", "Waiting on customer", "Waiting on engineering", "Resolved", "Reopened"]
+    },
+    {
+      "id": "qa-002",
+      "category": "simple_lookup",
+      "question": "Who is allowed to rotate SupportFlow API keys?",
+      "expected_answer": "Only Support Admins can rotate API keys.",
+      "expected_sources": ["sample_docs/01_user_manual/roles_permissions.json", "sample_docs/02_faq/customer_admin_faq.md"],
+      "expected_keywords": ["Support Admins", "rotate API keys"]
+    },
+    {
+      "id": "qa-003",
+      "category": "simple_lookup",
+      "question": "What happens if a destination queue is disabled?",
+      "expected_answer": "New inbound inquiries are routed to the configured fallback queue.",
+      "expected_sources": ["sample_docs/01_user_manual/queue_configuration.md"],
+      "expected_keywords": ["disabled", "fallback queue", "new inbound inquiries"]
+    },
+    {
+      "id": "qa-004",
+      "category": "simple_lookup",
+      "question": "Which role can inspect conversations and export reports but cannot reply?",
+      "expected_answer": "Read Only Analyst.",
+      "expected_sources": ["sample_docs/01_user_manual/roles_permissions.json"],
+      "expected_keywords": ["Read Only Analyst", "cannot reply", "export reports"]
+    },
+    {
+      "id": "qa-005",
+      "category": "simple_lookup",
+      "question": "What is the default tenant REST API limit?",
+      "expected_answer": "600 requests per minute across the REST API.",
+      "expected_sources": ["sample_docs/04_api_specs/rate_limits.txt"],
+      "expected_keywords": ["600 requests per minute", "REST API"]
+    },
+    {
+      "id": "qa-006",
+      "category": "simple_lookup",
+      "question": "What header carries the webhook signature?",
+      "expected_answer": "X-SupportFlow-Signature.",
+      "expected_sources": ["sample_docs/04_api_specs/webhooks_api.json"],
+      "expected_keywords": ["X-SupportFlow-Signature"]
+    },
+    {
+      "id": "qa-007",
+      "category": "simple_lookup",
+      "question": "What are the first response targets for urgent and high priority queues?",
+      "expected_answer": "Urgent is 30 minutes during business hours. High is 2 hours during business hours.",
+      "expected_sources": ["sample_docs/08_operations_rules/queue_sla_rules.md"],
+      "expected_keywords": ["urgent", "30 minutes", "high", "2 hours"]
+    },
+    {
+      "id": "qa-008",
+      "category": "simple_lookup",
+      "question": "When should a postmortem avoid publishing root cause language?",
+      "expected_answer": "Until engineering and support operations approve the final wording.",
+      "expected_sources": ["sample_docs/03_incident_response/postmortem_template.docx.txt"],
+      "expected_keywords": ["root cause", "engineering", "support operations", "approve"]
+    },
+    {
+      "id": "qa-009",
+      "category": "simple_lookup",
+      "question": "Which release added the message.created webhook event?",
+      "expected_answer": "The April 2026 release added message.created.",
+      "expected_sources": ["sample_docs/05_release_notes/2026-04-release.md", "sample_docs/05_release_notes/release_changelog.csv"],
+      "expected_keywords": ["April 2026", "message.created"]
+    },
+    {
+      "id": "qa-010",
+      "category": "simple_lookup",
+      "question": "What should agents do when a suggested article is wrong?",
+      "expected_answer": "Mark the suggestion as not helpful and add a note with the correct article or missing topic.",
+      "expected_sources": ["sample_docs/02_faq/agent_faq.txt"],
+      "expected_keywords": ["not helpful", "correct article", "knowledge review"]
+    },
+    {
+      "id": "qa-011",
+      "category": "multi_document",
+      "question": "A customer says webhooks are delayed. What should support check and how should they describe the impact?",
+      "expected_answer": "Check event ingestion health, retry worker queue depth, failed callback status codes, and whether failures are global or domain-specific. Tell the customer delivery is delayed, not lost, unless engineering confirms data loss.",
+      "expected_sources": ["sample_docs/03_incident_response/webhook_delivery_incident_runbook.md", "sample_docs/07_support_templates/customer_update_snippets.json"],
+      "expected_keywords": ["retry worker", "backlog", "delayed", "not lost", "data loss"]
+    },
+    {
+      "id": "qa-012",
+      "category": "multi_document",
+      "question": "If API-created inquiries are going to a disabled queue, which behavior and test case should confirm the routing result?",
+      "expected_answer": "Disabled queues route new inbound inquiries to the fallback queue and add needs-triage. The routing regression test checks that a disabled destination queue routes to fallback and records the expected audit log.",
+      "expected_sources": ["sample_docs/01_user_manual/queue_configuration.md", "sample_docs/06_test_specs/routing_regression_test.md"],
+      "expected_keywords": ["fallback queue", "needs-triage", "routing regression", "audit log"]
+    },
+    {
+      "id": "qa-013",
+      "category": "multi_document",
+      "question": "What controls keep internal notes private and who can export them?",
+      "expected_answer": "Internal notes are not visible to customers. Exports that include them are limited to roles with export permission, such as Team Leads, Support Admins, and Read Only Analysts, with redaction enabled by default.",
+      "expected_sources": ["sample_docs/02_faq/customer_admin_faq.md", "sample_docs/02_faq/import_export_faq.json", "sample_docs/01_user_manual/roles_permissions.json"],
+      "expected_keywords": ["internal notes", "excluded", "export permission", "redaction"]
+    },
+    {
+      "id": "qa-014",
+      "category": "multi_document",
+      "question": "What changed in March 2026 for article suggestions, and what operations rule reviews those articles?",
+      "expected_answer": "March 2026 added not helpful feedback for article suggestions. Knowledge review rules trigger review after three or more not helpful votes in seven days.",
+      "expected_sources": ["sample_docs/05_release_notes/2026-03-release.txt", "sample_docs/08_operations_rules/knowledge_review_rules.md"],
+      "expected_keywords": ["not helpful feedback", "three or more", "seven days", "review"]
+    },
+    {
+      "id": "qa-015",
+      "category": "multi_document",
+      "question": "How should an agent handle a conversation that is near SLA breach and needs engineering?",
+      "expected_answer": "Add the sla-risk tag when within 15 minutes of breach, notify the queue lead, escalate using the engineering escalation template, and keep customer updates at the required cadence while Waiting on engineering.",
+      "expected_sources": ["sample_docs/08_operations_rules/queue_sla_rules.md", "sample_docs/07_support_templates/response_templates.md", "sample_docs/07_support_templates/escalation_summary_template.docx.txt"],
+      "expected_keywords": ["sla-risk", "queue lead", "Waiting on engineering", "next update"]
+    },
+    {
+      "id": "qa-016",
+      "category": "multi_document",
+      "question": "Which documents explain how PDF and DOCX sources are handled during import?",
+      "expected_answer": "The import/export FAQ says PDF and DOCX are converted to text before indexing, and the bulk import test plan verifies PDF and DOCX placeholders are indexed.",
+      "expected_sources": ["sample_docs/02_faq/import_export_faq.json", "sample_docs/06_test_specs/bulk_import_test_plan.txt"],
+      "expected_keywords": ["PDF", "DOCX", "converted to text", "indexed"]
+    },
+    {
+      "id": "qa-017",
+      "category": "multi_document",
+      "question": "What should be checked before enabling strict webhook signature validation after the April release?",
+      "expected_answer": "Customers should confirm their webhook libraries can access the raw request body, because signature verification uses the raw body and the X-SupportFlow-Signature header.",
+      "expected_sources": ["sample_docs/05_release_notes/2026-04-release.md", "sample_docs/04_api_specs/webhooks_api.json"],
+      "expected_keywords": ["raw request body", "X-SupportFlow-Signature", "strict signature validation"]
+    },
+    {
+      "id": "qa-018",
+      "category": "multi_document",
+      "question": "What should be retained for audit when access or API ownership changes?",
+      "expected_answer": "Role changes, API key changes, queue configuration changes, and export events are retained in audit logs for 24 months. Quarterly access review should confirm API key owners are active team members.",
+      "expected_sources": ["sample_docs/08_operations_rules/data_retention_policy.txt", "sample_docs/08_operations_rules/access_review_checklist.pdf.txt"],
+      "expected_keywords": ["audit logs", "24 months", "API key owners", "active team members"]
+    },
+    {
+      "id": "qa-019",
+      "category": "multi_document",
+      "question": "Which release and manual entry explain load balanced assignment?",
+      "expected_answer": "The February 2026 release added load balanced assignment, and the queue configuration manual explains it prefers the available agent with the fewest open inquiries.",
+      "expected_sources": ["sample_docs/05_release_notes/2026-02-release.md", "sample_docs/01_user_manual/queue_configuration.md"],
+      "expected_keywords": ["February 2026", "load balanced assignment", "fewest open inquiries"]
+    },
+    {
+      "id": "qa-020",
+      "category": "multi_document",
+      "question": "How should support handle a stale article suggestion during an active incident?",
+      "expected_answer": "Mark the suggestion as not helpful, add the correct article or missing topic, and follow knowledge review triggers. Active-incident wrong suggestions are high priority for the Knowledge Owner in the escalation matrix.",
+      "expected_sources": ["sample_docs/02_faq/agent_faq.txt", "sample_docs/08_operations_rules/knowledge_review_rules.md", "sample_docs/08_operations_rules/escalation_matrix.csv"],
+      "expected_keywords": ["not helpful", "Knowledge Owner", "active incident", "review"]
+    },
+    {
+      "id": "qa-021",
+      "category": "api_error_named_entities",
+      "question": "What does AUTH_401 mean and what should the agent recommend?",
+      "expected_answer": "AUTH_401 means the API key is missing, expired, or invalid. The agent should ask the customer admin to verify or rotate the key.",
+      "expected_sources": ["sample_docs/04_api_specs/errors_reference.csv", "sample_docs/07_support_templates/api_error_response_macros.csv"],
+      "expected_keywords": ["AUTH_401", "API key", "rotate"]
+    },
+    {
+      "id": "qa-022",
+      "category": "api_error_named_entities",
+      "question": "What should support ask for when a customer reports VALIDATION_422?",
+      "expected_answer": "Ask for the field-level validation message and sanitized payload shape. Do not retry without changing the request body.",
+      "expected_sources": ["sample_docs/04_api_specs/errors_reference.csv", "sample_docs/04_api_specs/rate_limits.txt", "sample_docs/07_support_templates/api_error_response_macros.csv"],
+      "expected_keywords": ["VALIDATION_422", "schema validation", "payload", "do not retry"]
+    },
+    {
+      "id": "qa-023",
+      "category": "api_error_named_entities",
+      "question": "How should a customer handle RATE_429?",
+      "expected_answer": "RATE_429 means the rate limit was exceeded. They should retry with exponential backoff with jitter and inspect rate-limit headers such as Retry-After.",
+      "expected_sources": ["sample_docs/04_api_specs/errors_reference.csv", "sample_docs/04_api_specs/rate_limits.txt"],
+      "expected_keywords": ["RATE_429", "Rate limit exceeded", "exponential backoff", "Retry-After"]
+    },
+    {
+      "id": "qa-024",
+      "category": "api_error_named_entities",
+      "question": "What does WEBHOOK_SIG_INVALID usually require checking?",
+      "expected_answer": "Check the signing secret, timestamp tolerance, and raw request body handling.",
+      "expected_sources": ["sample_docs/04_api_specs/errors_reference.csv", "sample_docs/07_support_templates/api_error_response_macros.csv", "sample_docs/05_release_notes/2026-04-release.md"],
+      "expected_keywords": ["WEBHOOK_SIG_INVALID", "signing secret", "timestamp tolerance", "raw request body"]
+    },
+    {
+      "id": "qa-025",
+      "category": "api_error_named_entities",
+      "question": "Which API endpoint updates a conversation state, and what state values are allowed?",
+      "expected_answer": "PATCH /v1/conversations/{conversation_id}/state updates state. Allowed values are open, waiting_on_customer, waiting_on_engineering, and resolved.",
+      "expected_sources": ["sample_docs/04_api_specs/conversations_api.md"],
+      "expected_keywords": ["PATCH", "/v1/conversations/{conversation_id}/state", "waiting_on_engineering", "resolved"]
+    },
+    {
+      "id": "qa-026",
+      "category": "api_error_named_entities",
+      "question": "What event is sent after a public reply or internal note is recorded?",
+      "expected_answer": "message.created is sent after a public reply, customer message, or internal note is recorded.",
+      "expected_sources": ["sample_docs/04_api_specs/webhooks_api.json", "sample_docs/05_release_notes/2026-04-release.md"],
+      "expected_keywords": ["message.created", "internal note", "visibility"]
+    },
+    {
+      "id": "qa-027",
+      "category": "api_error_named_entities",
+      "question": "If a conversation ID returns CONV_404, what should support verify?",
+      "expected_answer": "Verify whether the conversation ID was merged, archived, or mistyped, and ask for the canonical conversation ID if needed.",
+      "expected_sources": ["sample_docs/04_api_specs/errors_reference.csv", "sample_docs/07_support_templates/api_error_response_macros.csv"],
+      "expected_keywords": ["CONV_404", "merged", "archived", "canonical conversation ID"]
+    },
+    {
+      "id": "qa-028",
+      "category": "api_error_named_entities",
+      "question": "What changed for API v2 preview message visibility?",
+      "expected_answer": "messages[].is_internal is replaced by messages[].visibility.",
+      "expected_sources": ["sample_docs/05_release_notes/migration_notes_v2.md"],
+      "expected_keywords": ["messages[].is_internal", "messages[].visibility"]
+    },
+    {
+      "id": "qa-029",
+      "category": "unanswerable",
+      "question": "What is SupportFlow's exact uptime percentage for May 2026?",
+      "expected_answer": "The provided documents do not state the exact uptime percentage for May 2026.",
+      "expected_sources": [],
+      "expected_keywords": ["do not state", "not provided", "May 2026"]
+    },
+    {
+      "id": "qa-030",
+      "category": "unanswerable",
+      "question": "Which named engineer owns the webhook retry worker?",
+      "expected_answer": "The documents name owner roles, not individual engineers, so the named engineer is not available.",
+      "expected_sources": [],
+      "expected_keywords": ["owner roles", "not individual", "not available"]
+    },
+    {
+      "id": "qa-031",
+      "category": "unanswerable",
+      "question": "What is the secret value used to sign SupportFlow webhooks?",
+      "expected_answer": "The documents do not provide secret values, and the assistant should not invent or expose secrets.",
+      "expected_sources": [],
+      "expected_keywords": ["do not provide", "secret", "should not"]
+    },
+    {
+      "id": "qa-032",
+      "category": "unanswerable",
+      "question": "What mobile SDK version supports SupportFlow conversation creation?",
+      "expected_answer": "The documents discuss REST API conversation creation but do not mention a mobile SDK version.",
+      "expected_sources": [],
+      "expected_keywords": ["REST API", "do not mention", "mobile SDK"]
+    },
+    {
+      "id": "qa-033",
+      "category": "unanswerable",
+      "question": "What is the contractual penalty for a breached first-response SLA?",
+      "expected_answer": "The queue SLA rules define targets and escalation behavior, but no contractual penalty is stated.",
+      "expected_sources": ["sample_docs/08_operations_rules/queue_sla_rules.md"],
+      "expected_keywords": ["targets", "no contractual penalty", "not stated"]
+    },
+    {
+      "id": "qa-034",
+      "category": "unanswerable",
+      "question": "Which customer domains were affected by the last webhook incident?",
+      "expected_answer": "The incident runbook explains how to identify affected domains, but no specific past customer domains are listed.",
+      "expected_sources": ["sample_docs/03_incident_response/webhook_delivery_incident_runbook.md"],
+      "expected_keywords": ["how to identify", "no specific", "customer domains"]
+    },
+    {
+      "id": "qa-035",
+      "category": "unanswerable",
+      "question": "What salary band should a Support Admin have?",
+      "expected_answer": "The documents define Support Admin permissions but contain no salary or compensation information.",
+      "expected_sources": ["sample_docs/01_user_manual/roles_permissions.json"],
+      "expected_keywords": ["permissions", "no salary", "compensation"]
+    },
+    {
+      "id": "qa-036",
+      "category": "vague_paraphrased",
+      "question": "Our queue looks shut off. Where do new messages go?",
+      "expected_answer": "If a queue is disabled, new inbound inquiries route to the configured fallback queue.",
+      "expected_sources": ["sample_docs/01_user_manual/queue_configuration.md"],
+      "expected_keywords": ["disabled", "new inbound inquiries", "fallback queue"]
+    },
+    {
+      "id": "qa-037",
+      "category": "vague_paraphrased",
+      "question": "The bot keeps suggesting the wrong help page. What should we do?",
+      "expected_answer": "Mark the suggestion as not helpful, add the correct article or missing topic, and let the feedback enter the knowledge review queue.",
+      "expected_sources": ["sample_docs/02_faq/agent_faq.txt", "sample_docs/08_operations_rules/knowledge_review_rules.md"],
+      "expected_keywords": ["not helpful", "correct article", "knowledge review"]
+    },
+    {
+      "id": "qa-038",
+      "category": "vague_paraphrased",
+      "question": "We are getting throttled by the API. What is the expected behavior?",
+      "expected_answer": "The API returns RATE_429 when limits are exceeded, with rate-limit headers. Clients should retry using exponential backoff with jitter.",
+      "expected_sources": ["sample_docs/04_api_specs/errors_reference.csv", "sample_docs/04_api_specs/rate_limits.txt"],
+      "expected_keywords": ["throttled", "RATE_429", "rate-limit headers", "backoff"]
+    },
+    {
+      "id": "qa-039",
+      "category": "vague_paraphrased",
+      "question": "The customer replied after we closed the case. What state should I expect?",
+      "expected_answer": "A resolved conversation becomes Reopened when the customer replies in the same thread.",
+      "expected_sources": ["sample_docs/01_user_manual/agent_workspace_guide.md", "sample_docs/02_faq/faq_catalog.csv"],
+      "expected_keywords": ["resolved", "Reopened", "same thread"]
+    },
+    {
+      "id": "qa-040",
+      "category": "vague_paraphrased",
+      "question": "How do we tell customers about an outage without guessing?",
+      "expected_answer": "Use confirmed facts only, include affected feature, impact, current status, and next update time, and avoid speculative root cause.",
+      "expected_sources": ["sample_docs/07_support_templates/outage_notice_template.txt", "sample_docs/03_incident_response/postmortem_template.docx.txt"],
+      "expected_keywords": ["confirmed facts", "next update", "speculative root cause"]
+    }
+  ]
+}

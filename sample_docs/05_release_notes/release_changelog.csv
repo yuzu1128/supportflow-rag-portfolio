@@ -1,0 +1,8 @@
+source_id,date,area,change_type,summary
+release-changelog,2026-02-12,Queues,New,Load balanced assignment added
+release-changelog,2026-02-12,Queues,New,Fallback routing for disabled queues added
+release-changelog,2026-03-09,Webhooks,New,Delivery dashboard added
+release-changelog,2026-03-09,Knowledge,New,Not helpful feedback added for article suggestions
+release-changelog,2026-04-18,Webhooks,New,message.created event added
+release-changelog,2026-04-18,API,Changed,Raw-body signature verification clarified
+release-changelog,2026-04-18,Macros,New,Variable validation before send added

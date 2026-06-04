@@ -1,0 +1,19 @@
+Placeholder for DOCX source: Engineering Escalation Summary
+Source ID: template-escalation-summary
+
+Use this template when a support inquiry needs engineering review.
+
+Fields:
+- Conversation ID
+- Customer impact
+- Product area
+- Current inquiry state
+- Steps to reproduce
+- Expected behavior
+- Actual behavior
+- Error codes or request IDs
+- Relevant logs with sensitive values removed
+- Customer-facing next update time
+
+Rule:
+The support lead owns customer updates while the engineering lead owns technical mitigation.

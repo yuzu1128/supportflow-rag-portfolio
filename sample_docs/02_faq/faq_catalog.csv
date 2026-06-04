@@ -1,0 +1,6 @@
+source_id,question,short_answer,related_doc
+faq-catalog-001,How do I pause SLA timers?,Only queues with customer-wait pauses enabled pause timers when state is Waiting on customer.,01_user_manual/queue_configuration.md
+faq-catalog-002,Who can rotate API keys?,Only Support Admins can rotate API keys.,01_user_manual/roles_permissions.json
+faq-catalog-003,Can internal notes be exported?,Read Only Analysts and above can export permitted reports, but redaction applies by default.,01_user_manual/roles_permissions.json
+faq-catalog-004,Why did a conversation reopen?,A resolved conversation reopens when the customer replies in the same thread.,01_user_manual/agent_workspace_guide.md
+faq-catalog-005,What happens when a queue is disabled?,New inbound inquiries go to the configured fallback queue.,01_user_manual/queue_configuration.md

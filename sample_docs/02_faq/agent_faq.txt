@@ -1,0 +1,17 @@
+Source ID: faq-agent
+Title: Agent FAQ
+
+Q: What should I do when an inquiry belongs to another queue?
+A: Use Transfer, choose the destination queue, add a short internal note, and keep the priority unchanged unless the receiving queue has different SLA rules.
+
+Q: When should I use Waiting on customer?
+A: Use it after asking a customer for logs, screenshots, request IDs, or configuration details. The SLA response timer pauses only if the queue policy allows customer-wait pauses.
+
+Q: Can I merge duplicate conversations?
+A: Yes. Merge only when the same customer is asking about the same issue. The oldest conversation keeps the canonical conversation ID.
+
+Q: What if a suggested article is wrong?
+A: Mark the suggestion as not helpful and add a note with the correct article or missing topic. This feedback appears in the knowledge review queue.
+
+Q: Can I close a reopened inquiry immediately?
+A: Only if the new message confirms resolution or is unrelated. Otherwise keep the conversation open and respond based on the new context.

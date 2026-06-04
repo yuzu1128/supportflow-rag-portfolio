@@ -1,0 +1,22 @@
+Source ID: incident-search-index-lag
+Title: Search Index Lag Runbook
+
+Trigger:
+Open a SEV2 investigation when the median article indexing delay is above 15 minutes for 20 minutes, or when more than three customers report missing recent articles in agent suggestions.
+
+Initial checks:
+- Confirm document ingestion jobs are completing.
+- Check vector index write latency.
+- Compare keyword search and semantic search results for the same article.
+- Verify that retired articles are not being returned as fresh results.
+
+Mitigation:
+- Disable large optional reindex batches.
+- Prioritize new and recently updated support articles.
+- Ask support leads to use direct article links if suggestions are stale.
+
+Customer-facing wording:
+"Article suggestions may be delayed for recently updated knowledge content. Existing published articles remain available through direct search."
+
+Resolution target:
+Backlog age below 5 minutes and manual spot checks passing for 10 recently updated articles.

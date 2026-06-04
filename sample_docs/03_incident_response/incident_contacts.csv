@@ -1,0 +1,6 @@
+role,primary_channel,backup_channel,activation_rule
+Incident Commander,incident-command channel,on-call manager,Required for SEV1 and SEV2
+Support Lead,support-incident channel,queue leads group,Required when customer conversations are affected
+Engineering Lead,eng-incident channel,service owner rotation,Required when mitigation or rollback is needed
+Scribe,incident-notes document,incident-command channel,Required for SEV1 and recommended for SEV2
+Comms Approver,status-review channel,support director,Required before public status updates

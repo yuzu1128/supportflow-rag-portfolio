@@ -1,0 +1,7 @@
+source_id,error_code,http_status,meaning,recommended_agent_action
+api-errors,AUTH_401,401,API key is missing expired or invalid,Ask the customer admin to rotate or verify the key
+api-errors,AUTH_403_SCOPE,403,API key lacks the required scope,Confirm endpoint scope and admin role permissions
+api-errors,CONV_404,404,Conversation ID was not found,Check whether the ID was merged archived or mistyped
+api-errors,VALIDATION_422,422,Request body failed schema validation,Ask for request payload field names and validation message
+api-errors,RATE_429,429,Rate limit exceeded,Advise retry with backoff and review rate-limit headers
+api-errors,WEBHOOK_SIG_INVALID,400,Webhook signature verification failed,Check signing secret timestamp tolerance and raw request body handling

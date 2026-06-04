@@ -1,0 +1,21 @@
+{
+  "source_id": "template-customer-update-snippets",
+  "snippets": [
+    {
+      "name": "delay_acknowledgement",
+      "text": "We are still investigating and have not confirmed data loss. The current impact appears to be delayed processing."
+    },
+    {
+      "name": "request_id_needed",
+      "text": "Could you send the request ID and approximate timestamp? That will help us match the event to our logs."
+    },
+    {
+      "name": "reopen_explanation",
+      "text": "Your reply reopened the inquiry so we can continue in the same conversation thread."
+    },
+    {
+      "name": "article_feedback",
+      "text": "I marked the article suggestion for review because it did not match your case."
+    }
+  ]
+}

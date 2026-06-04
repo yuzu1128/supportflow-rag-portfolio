@@ -1,0 +1,113 @@
+# SupportFlow RAG Portfolio
+
+SupportFlow RAG is a portfolio implementation of an internal knowledge RAG system for a fictional B2B inquiry-management SaaS operated by Northstar Systems.
+
+It demonstrates document ingestion, hybrid retrieval, grounded answer generation, source display, abstention, evaluation, Docker-based local operation, and AWS-oriented operations design.
+
+## What This Shows
+
+- Python/FastAPI backend for RAG APIs
+- React/Vite frontend with Ask, Documents, Evaluation, and Logs tabs
+- Built-in sample documents for a fictional inquiry-management SaaS
+- Markdown, TXT, CSV, JSON, PDF, and DOCX ingestion strategy
+- Hybrid retrieval with keyword and vector-ready scoring
+- OpenRouter and local LLM provider abstraction
+- SQLite logs and metadata
+- RAG evaluation with Recall@k, MRR, citation rate, abstention accuracy, and keyword matching
+- Docker Compose local demo without a permanently hosted API
+- Documentation for AWS ECS/Fargate-style production operation
+
+## Deployment Policy
+
+The live RAG API is intentionally not hosted permanently. This avoids maintenance cost and API billing risk.
+
+Recommended portfolio flow:
+
+- Cloudflare Pages hosts the one-page HTML explanation in `presentation/`.
+- The real RAG app runs locally with Docker Compose during a screen-share demo.
+- Reviewers can clone the GitHub repository and run the same local demo.
+
+## Quick Start
+
+```bash
+cp .env.example .env
+docker compose up --build
+```
+
+On Windows PowerShell:
+
+```powershell
+Copy-Item .env.example .env
+docker compose up --build
+```
+
+Open:
+
+- Frontend: `http://localhost:5173`
+- Backend API: `http://localhost:8000`
+- API docs: `http://localhost:8000/docs`
+
+The default `.env.example` uses `LLM_PROVIDER=mock` so the app can start without an API key. For a real model, set either OpenRouter or Ollama.
+
+## LLM Modes
+
+### OpenRouter
+
+Set:
+
+```env
+LLM_PROVIDER=openrouter
+OPENROUTER_API_KEY=your_key_here
+OPENROUTER_MODEL=selected_model_later
+```
+
+The concrete model is intentionally not fixed in this repository plan.
+
+### Ollama
+
+Run Ollama locally, pull a model of your choice, then set:
+
+```env
+LLM_PROVIDER=ollama
+OLLAMA_BASE_URL=http://host.docker.internal:11434
+OLLAMA_MODEL=selected_local_model_later
+```
+
+### Mock
+
+`LLM_PROVIDER=mock` is only for local fallback and automated tests. It is not presented as the production-quality model path.
+
+## Repository Layout
+
+```text
+backend/       FastAPI backend, RAG pipeline, SQLite, tests
+frontend/      React/Vite web UI
+sample_docs/   Built-in fictional SupportFlow documents
+evaluation/    QA dataset and expected sources
+docs/          Design, AWS architecture, operations, evaluation report
+presentation/  Screen-share HTML explanation for Cloudflare Pages
+```
+
+## Test Commands
+
+Backend:
+
+```bash
+cd backend
+python -m pytest
+```
+
+Frontend:
+
+```bash
+cd frontend
+npm install
+cp .env.example .env
+npm run build
+```
+
+## Notes
+
+- This is a portfolio project, not a production SaaS.
+- Authentication is represented by demo roles only. Production authentication is documented as Cognito or internal SSO.
+- Cloudflare Pages is used for static explanation material, not for hosting the Python RAG API.

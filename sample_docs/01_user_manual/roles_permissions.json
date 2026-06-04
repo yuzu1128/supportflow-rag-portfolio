@@ -1,0 +1,43 @@
+{
+  "source_id": "manual-roles-permissions",
+  "title": "Roles and Permissions Reference",
+  "roles": [
+    {
+      "role": "Agent",
+      "can_reply": true,
+      "can_assign": true,
+      "can_export": false,
+      "can_manage_users": false,
+      "notes": "Can handle assigned inquiries and add internal notes."
+    },
+    {
+      "role": "Team Lead",
+      "can_reply": true,
+      "can_assign": true,
+      "can_export": true,
+      "can_manage_users": false,
+      "notes": "Can bulk reassign inquiries, approve macros, and view queue reports."
+    },
+    {
+      "role": "Support Admin",
+      "can_reply": true,
+      "can_assign": true,
+      "can_export": true,
+      "can_manage_users": true,
+      "notes": "Can configure queues, business hours, roles, and integrations."
+    },
+    {
+      "role": "Read Only Analyst",
+      "can_reply": false,
+      "can_assign": false,
+      "can_export": true,
+      "can_manage_users": false,
+      "notes": "Can inspect conversations and reports but cannot change inquiry state."
+    }
+  ],
+  "permission_notes": [
+    "Only Support Admins can rotate API keys.",
+    "Only Team Leads and Support Admins can reopen resolved conversations in bulk.",
+    "Exports include redaction by default for tokens, emails, and phone-like strings."
+  ]
+}

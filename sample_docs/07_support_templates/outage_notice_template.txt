@@ -1,0 +1,20 @@
+Source ID: template-outage-notice
+Title: Customer Incident Notice Template
+
+Subject:
+SupportFlow service update for {{incident_area}}
+
+Body:
+Hi {{customer_name}},
+
+We are investigating an issue affecting {{incident_area}}. Current impact: {{customer_impact}}.
+
+What we know:
+- Affected feature: {{affected_feature}}
+- Start time: {{incident_start_time}}
+- Current state: {{current_status}}
+
+Next update:
+We will share the next update by {{next_update_time}} or sooner if the status changes.
+
+Do not include speculative root cause. Use confirmed facts only.

@@ -1,0 +1,14 @@
+Placeholder for PDF source: SupportFlow API Quickstart
+Source ID: api-quickstart-pdf-placeholder
+
+This text file represents a lightweight PDF source for portfolio ingestion tests.
+
+Quickstart steps:
+1. Create an API key from Admin Settings > Developer Access.
+2. Store the key in a server-side secret manager.
+3. Send POST /v1/conversations with customer_id, subject, body, channel, and idempotency_key.
+4. Store the returned conversation_id for future status checks.
+5. Configure webhooks for conversation.created and conversation.updated.
+
+Security note:
+Never expose SupportFlow API keys in browser code, mobile clients, public repositories, or customer-visible logs.

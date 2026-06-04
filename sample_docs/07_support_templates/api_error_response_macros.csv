@@ -1,0 +1,7 @@
+source_id,macro_name,error_code,response_goal
+template-api-errors,api.auth.missing_key,AUTH_401,Ask customer admin to verify or rotate API key
+template-api-errors,api.scope.denied,AUTH_403_SCOPE,Explain missing scope and request endpoint being called
+template-api-errors,api.conversation.not_found,CONV_404,Ask for canonical conversation ID and whether conversations were merged
+template-api-errors,api.validation.failed,VALIDATION_422,Ask for field-level validation message and sanitized payload shape
+template-api-errors,api.rate_limited,RATE_429,Recommend exponential backoff with jitter and review headers
+template-api-errors,api.webhook.signature,WEBHOOK_SIG_INVALID,Check raw request body signing secret and timestamp tolerance

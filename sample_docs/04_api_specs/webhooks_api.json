@@ -1,0 +1,28 @@
+{
+  "source_id": "api-webhooks",
+  "title": "Webhook API Specification",
+  "version": "2026-04",
+  "events": [
+    {
+      "name": "conversation.created",
+      "description": "Sent after a new conversation is created by email, widget, chat integration, or API.",
+      "required_fields": ["event_id", "event_type", "conversation_id", "created_at"]
+    },
+    {
+      "name": "conversation.updated",
+      "description": "Sent when state, priority, queue, assignment, or tags change.",
+      "required_fields": ["event_id", "event_type", "conversation_id", "changes", "created_at"]
+    },
+    {
+      "name": "message.created",
+      "description": "Sent after a public reply, customer message, or internal note is recorded.",
+      "required_fields": ["event_id", "event_type", "conversation_id", "message_id", "visibility"]
+    }
+  ],
+  "signature_header": "X-SupportFlow-Signature",
+  "retry_policy": {
+    "attempts": 12,
+    "schedule": "exponential backoff",
+    "terminal_status_codes": [400, 401, 403, 404, 410]
+  }
+}

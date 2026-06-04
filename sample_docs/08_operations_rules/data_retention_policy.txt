@@ -1,0 +1,17 @@
+Source ID: ops-data-retention
+Title: SupportFlow Data Retention Policy
+
+Conversation records:
+Retain active and resolved conversation metadata for 24 months by default.
+
+Internal notes:
+Retain internal notes for 18 months unless a customer contract requires a shorter period.
+
+Audit logs:
+Retain role changes, API key changes, queue configuration changes, and export events for 24 months.
+
+Knowledge articles:
+Published and retired articles are retained while referenced by active support workflows. Retired articles can be removed after the retention review confirms no active dependency.
+
+Redaction:
+Exports redact token-like strings, email addresses, and phone-like strings by default. Administrators can request stricter export profiles.

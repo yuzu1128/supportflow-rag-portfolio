@@ -1,0 +1,18 @@
+Placeholder for DOCX source: SupportFlow Incident Postmortem Template
+Source ID: incident-postmortem-template
+
+This text file stands in for a lightweight DOCX document in the sample corpus.
+
+Required sections:
+1. Summary
+2. Customer impact
+3. Timeline
+4. Detection path
+5. Root cause
+6. Mitigation
+7. What went well
+8. What needs improvement
+9. Action items with owner role and due date
+
+Postmortem rule:
+Do not publish root cause language until engineering and support operations approve the final wording. Customer-facing summaries must distinguish confirmed facts from investigation notes.

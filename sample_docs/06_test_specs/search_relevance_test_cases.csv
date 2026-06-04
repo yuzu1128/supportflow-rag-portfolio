@@ -1,0 +1,7 @@
+source_id,query,expected_top_source,required_keyword
+test-search-relevance,how do i rotate api keys,02_faq/customer_admin_faq.md,Support Admins
+test-search-relevance,webhooks are delayed,03_incident_response/webhook_delivery_incident_runbook.md,retry backlog
+test-search-relevance,what does RATE_429 mean,04_api_specs/errors_reference.csv,Rate limit exceeded
+test-search-relevance,article suggestions stale,03_incident_response/search_index_lag_runbook.txt,indexing delay
+test-search-relevance,who can export internal notes,02_faq/import_export_faq.json,export permission
+test-search-relevance,disabled queue routing,01_user_manual/queue_configuration.md,fallback queue

@@ -1,0 +1,16 @@
+Source ID: test-bulk-import
+Title: Bulk Import Test Plan
+
+Scope:
+Validate knowledge base imports for Markdown, TXT, CSV, JSON, PDF text extraction, and DOCX text extraction.
+
+Cases:
+- Import 100 Markdown articles with unique source IDs.
+- Import a CSV FAQ file with question and short_answer columns.
+- Import JSON FAQ objects with nested item arrays.
+- Import a PDF placeholder and confirm extracted text is indexed.
+- Import a DOCX placeholder and confirm headings are preserved.
+- Re-import the same files and confirm exact duplicates are skipped.
+
+Expected results:
+Imported documents appear in search within 5 minutes. Duplicate files do not create duplicate article suggestions. Similar but non-identical articles are marked for review rather than silently skipped.

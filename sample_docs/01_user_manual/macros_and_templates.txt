@@ -1,0 +1,20 @@
+Source ID: manual-macros-templates
+Title: Macros and Templates Manual
+
+SupportFlow macros are reusable response blocks that agents can insert into the composer. Templates are longer structured replies for common inquiry types.
+
+Macro naming convention:
+- api.error.AUTH_401.token_expired
+- routing.queue.change_request
+- incident.status.update
+- kb.article.follow_up
+
+Macro approval rules:
+- Team leads can create draft macros.
+- Support operations must approve public macros.
+- Engineering must approve macros that mention API behavior or error code remediation.
+
+Variables:
+Use {{customer_name}}, {{conversation_id}}, {{ticket_priority}}, and {{next_update_time}}. If a variable is blank, the composer warns the agent before sending.
+
+Do not use macros for sensitive customer-specific promises, incident root cause statements, or unreleased feature commitments.

@@ -1,0 +1,22 @@
+{
+  "source_id": "faq-import-export",
+  "title": "Import and Export FAQ",
+  "items": [
+    {
+      "question": "Which file formats can be imported into the knowledge base?",
+      "answer": "Markdown, plain text, CSV, JSON, PDF, and DOCX are accepted by the ingestion workflow. PDF and DOCX are converted to text before indexing."
+    },
+    {
+      "question": "How are duplicated imported articles handled?",
+      "answer": "The importer checks title, canonical URL, and source_id. Exact duplicates are skipped. Similar articles are flagged for review."
+    },
+    {
+      "question": "Can conversation exports include internal notes?",
+      "answer": "Only Team Leads, Support Admins, and Read Only Analysts with export permission can include internal notes. Redaction remains enabled by default."
+    },
+    {
+      "question": "What is the maximum CSV import size?",
+      "answer": "The recommended maximum is 25 MB per file or 10,000 rows per import batch."
+    }
+  ]
+}

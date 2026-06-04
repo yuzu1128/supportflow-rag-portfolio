@@ -1,0 +1,6 @@
+source_id,condition,priority,target_owner,required_state,next_update
+ops-escalation-matrix,Customer cannot create or view multiple inquiries,urgent,Incident Commander,open,30 minutes
+ops-escalation-matrix,Webhook backlog affects more than five tenants,high,Engineering Lead,waiting_on_engineering,60 minutes
+ops-escalation-matrix,Single customer reports invalid webhook signature,normal,API Support Lead,open,8 business hours
+ops-escalation-matrix,Article suggestion is wrong for active incident,high,Knowledge Owner,open,60 minutes
+ops-escalation-matrix,Queue assignment rule sends inquiries to disabled queue,high,Support Operations Lead,open,60 minutes
