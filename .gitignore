@@ -8,6 +8,7 @@ dist/
 /data/
 /data-dev/
 /data-test/
+/.run/
 *.db
 *.sqlite
 *.log

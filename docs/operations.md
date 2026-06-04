@@ -112,6 +112,21 @@ Common demo failures and expected response:
 | Answers have no citations | Prompt or response parser issue | Inspect answer generation contract. |
 | Unanswerable questions hallucinate | Evidence threshold too low | Raise minimum source confidence or add refusal rule. |
 | Slow answers | LLM provider latency | Switch to local model or reduce context size. |
+| Ollama local model falls back to mock | Local model timed out or could not allocate memory | Use `gemma3:1b`, pre-warm Ollama, or run `scripts/start_native_ollama_demo.ps1` instead of Docker on 8GB machines. |
+
+## Local Ollama Demo Notes
+
+The Docker Compose path remains the standard reproducible demo path. On low-memory Windows laptops, Docker plus a local LLM can exhaust RAM before Ollama loads the model. For a no-API-key Google local model demo, use the native script:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\start_native_ollama_demo.ps1
+```
+
+Verified local model for this setup:
+
+- `gemma3:1b` for the native Ollama demo
+- `gemma3:270m` can run under tighter memory, but answer quality is too weak for the main walkthrough
+- Gemma 4 / Gemma 3 4B-class models should be reserved for machines with substantially more RAM
 
 ## Release Checklist
 

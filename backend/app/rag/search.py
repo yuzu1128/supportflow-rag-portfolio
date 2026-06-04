@@ -13,6 +13,10 @@ def tokenize(text: str) -> list[str]:
     return TOKEN_PATTERN.findall(text.lower())
 
 
+def identifier_tokens(tokens: list[str]) -> list[str]:
+    return [token for token in tokens if "_" in token or any(char.isdigit() for char in token)]
+
+
 @dataclass(frozen=True)
 class SearchDocument:
     id: str
@@ -48,6 +52,7 @@ class InMemoryHybridIndex:
         query_tokens = tokenize(query)
         if not query_tokens:
             return []
+        identifiers = identifier_tokens(query_tokens)
 
         scored: list[SearchResult] = []
         total_docs = max(len(self.documents), 1)
@@ -69,6 +74,12 @@ class InMemoryHybridIndex:
                 continue
 
             normalized = score / sqrt(len(tokens))
+            matched_identifiers = sum(1 for token in identifiers if token in term_counts)
+            if identifiers:
+                if matched_identifiers:
+                    normalized += matched_identifiers * 1.5
+                else:
+                    normalized *= 0.25
             scored.append(SearchResult(doc, normalized, make_snippet(doc.text, query_tokens)))
 
         scored.sort(key=lambda item: (-item.score, item.document.title, item.document.id))
@@ -98,7 +109,7 @@ class ChromaReadyHybridIndex:
         return self.fallback.search(query, k)
 
 
-def make_snippet(text: str, query_tokens: list[str], window: int = 180) -> str:
+def make_snippet(text: str, query_tokens: list[str], window: int = 360) -> str:
     lower_text = text.lower()
     first_hit = min(
         (lower_text.find(token) for token in query_tokens if lower_text.find(token) >= 0),

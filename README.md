@@ -29,6 +29,7 @@ Recommended portfolio flow:
 
 - Cloudflare Pages hosts the one-page HTML explanation in `presentation/`.
 - The real RAG app runs locally with Docker Compose during a screen-share demo.
+- For a no-API-key local LLM demo on low-memory laptops, run the native Ollama mode instead of Docker Compose.
 - Reviewers can clone the GitHub repository and run the same local demo.
 
 ## Quick Start
@@ -77,6 +78,28 @@ Run Ollama locally, pull a model of your choice, then set:
 LLM_PROVIDER=ollama
 OLLAMA_BASE_URL=http://host.docker.internal:11434
 OLLAMA_MODEL=selected_local_model_later
+```
+
+For the current low-memory Windows demo machine, the verified Google local model is:
+
+```env
+LLM_PROVIDER=ollama
+OLLAMA_BASE_URL=http://localhost:11434
+OLLAMA_MODEL=gemma3:1b
+```
+
+Gemma 4 and Gemma 3 4B-class models are better quality choices on stronger hardware, but they were not reliable on an 8GB RAM laptop while the RAG stack was running. The repository therefore keeps the provider configurable instead of hard-coding one model.
+
+Native Ollama demo on Windows:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\start_native_ollama_demo.ps1
+```
+
+Open `http://localhost:5179`. Stop it with:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\stop_native_demo.ps1
 ```
 
 ### Mock

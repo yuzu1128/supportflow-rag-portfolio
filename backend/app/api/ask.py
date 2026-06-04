@@ -21,7 +21,9 @@ def ask(request: AskRequest, store: SQLiteStore = Depends(get_store)) -> dict:
     results = index.search(request.question, k=request.k)
     filtered = [result for result in results if result.score >= request.abstain_threshold]
     abstained = not filtered
-    response = safe_generate(settings, request.question, [] if abstained else filtered)
+    context_limit = 1 if settings.llm_provider == "ollama" else 2
+    generation_contexts = [] if abstained else filtered[:context_limit]
+    response = safe_generate(settings, request.question, generation_contexts)
     citations = [
         Citation(
             document_id=result.document.id,

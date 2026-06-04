@@ -1,7 +1,7 @@
 import { mockDashboard, mockAskResponse } from '../data/mockData.js';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL?.replace(/\/$/, '') ?? '';
-const REQUEST_TIMEOUT_MS = 1600;
+const REQUEST_TIMEOUT_MS = 120000;
 
 async function fetchJson(path, options = {}) {
   if (!API_BASE_URL) {
