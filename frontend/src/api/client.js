@@ -5,7 +5,7 @@ const REQUEST_TIMEOUT_MS = 1600;
 
 async function fetchJson(path, options = {}) {
   if (!API_BASE_URL) {
-    throw new Error('VITE_API_BASE_URL is not configured');
+    throw new Error('VITE_API_BASE_URLが設定されていません');
   }
 
   const controller = new AbortController();
@@ -22,7 +22,7 @@ async function fetchJson(path, options = {}) {
     });
 
     if (!response.ok) {
-      throw new Error(`Backend returned ${response.status}`);
+      throw new Error(`バックエンドがHTTP ${response.status}を返しました`);
     }
 
     return response.json();
@@ -64,7 +64,7 @@ export async function askQuestion(question) {
           label: 'Retrieval score',
           value: Number(data.citations?.[0]?.score ?? 0).toFixed(2),
         },
-        { label: 'Citation coverage', value: `${data.citations?.length ?? 0} sources` },
+        { label: 'Citation coverage', value: `${data.citations?.length ?? 0}件` },
         { label: 'Abstention', value: data.abstained ? 'Triggered' : 'Not needed' },
       ],
     };

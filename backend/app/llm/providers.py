@@ -30,14 +30,14 @@ class MockProvider(BaseProvider):
     def generate(self, question: str, contexts: list[SearchResult]) -> LLMResponse:
         if not contexts:
             return LLMResponse(
-                "I do not have enough information in the registered documents to answer.",
+                "登録済み文書だけでは、この質問に回答するための十分な根拠が見つかりませんでした。",
                 self.name,
             )
 
         top = contexts[0]
         sentence = _first_sentence(top.document.text) or top.snippet
         return LLMResponse(
-            f"{sentence} [source: {top.document.id}]",
+            f"登録済み文書では、該当箇所に「{sentence}」と記載されています。 [source: {top.document.id}]",
             self.name,
         )
 
@@ -64,7 +64,10 @@ class OpenRouterProvider(BaseProvider):
             json={
                 "model": self.settings.openrouter_model,
                 "messages": [
-                    {"role": "system", "content": "Answer using only the provided context. Cite sources."},
+                    {
+                        "role": "system",
+                        "content": "提供されたコンテキストだけを根拠に日本語で回答してください。必ず出典を示してください。",
+                    },
                     {"role": "user", "content": prompt},
                 ],
                 "temperature": 0,
@@ -128,11 +131,11 @@ def build_prompt(question: str, contexts: list[SearchResult]) -> str:
     if not context_text:
         context_text = "No retrieved context."
     return (
-        "Question:\n"
+        "質問:\n"
         f"{question}\n\n"
-        "Context:\n"
+        "コンテキスト:\n"
         f"{context_text}\n\n"
-        "If the context is insufficient, say you do not have enough information."
+        "コンテキストが不足している場合は、十分な根拠がないと明示してください。"
     )
 
 
