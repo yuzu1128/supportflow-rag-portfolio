@@ -6,6 +6,7 @@ from app.api.deps import get_store
 from app.core.settings import get_settings
 from app.db.sqlite import SQLiteStore
 from app.llm.providers import provider_status
+from app.rag.search import chunk_count
 
 
 router = APIRouter()
@@ -48,7 +49,7 @@ def dashboard(store: SQLiteStore = Depends(get_store)) -> dict:
                 "owner": document.get("metadata", {}).get("owner", "Northstar Systems"),
                 "version": document.get("metadata", {}).get("version", "local-demo"),
                 "status": "Indexed",
-                "chunks": max(1, len(document["text"]) // 600),
+                "chunks": chunk_count(document["text"]),
                 "updatedAt": document["created_at"][:10],
                 "metadata": {
                     "region": document.get("metadata", {}).get("category", "supportflow"),

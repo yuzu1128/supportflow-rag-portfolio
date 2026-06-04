@@ -1,7 +1,7 @@
 from fastapi.testclient import TestClient
 
 from app.main import app
-from app.rag.search import InMemoryHybridIndex, SearchDocument
+from app.rag.search import InMemoryHybridIndex, SearchDocument, chunk_count, chunk_text
 
 
 def test_register_and_search_document(tmp_path, monkeypatch):
@@ -58,3 +58,49 @@ def test_identifier_query_prioritizes_exact_code_match():
     )
 
     assert results[0].document.id == "errors"
+
+
+def test_chunk_text_splits_long_documents_by_paragraph():
+    text = "\n\n".join(
+        [
+            "First policy section explains routing ownership and default queues.",
+            "Second policy section explains SLA breach escalation for VIP customers.",
+            "Third policy section explains post-incident review ownership.",
+        ]
+    )
+
+    chunks = chunk_text(text, chunk_size=90, overlap=20)
+
+    assert len(chunks) == 3
+    assert chunk_count(text) == 1
+
+
+def test_search_returns_matching_chunk_metadata():
+    long_intro = " ".join(
+        [
+            "General support queue ownership belongs to the operations lead.",
+            "Default assignment rules are reviewed during weekly operations governance.",
+        ]
+        * 5
+    )
+    document = SearchDocument(
+        id="policy",
+        title="Support Policy",
+        text="\n\n".join(
+            [
+                long_intro,
+                "Webhook delivery incidents should be escalated when retry backoff is exhausted.",
+                "Monthly reporting is reviewed by the customer success manager.",
+            ]
+        ),
+        metadata={},
+    )
+    index = InMemoryHybridIndex([document])
+
+    results = index.search("retry backoff exhausted webhook incident", k=1)
+
+    assert results[0].document.id == "policy"
+    assert results[0].chunk_id is not None
+    assert results[0].chunk_index is not None
+    assert results[0].chunk_index > 1
+    assert "retry backoff" in results[0].snippet.lower()

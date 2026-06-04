@@ -36,6 +36,8 @@ class Citation(BaseModel):
     title: str
     score: float
     snippet: str
+    chunk_id: str | None = None
+    chunk_index: int | None = None
 
 
 class SearchResponse(BaseModel):

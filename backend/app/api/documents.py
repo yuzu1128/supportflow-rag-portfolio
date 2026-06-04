@@ -145,6 +145,8 @@ def search_documents(
                 title=result.document.title,
                 score=result.score,
                 snippet=result.snippet,
+                chunk_id=result.chunk_id,
+                chunk_index=result.chunk_index,
             )
             for result in results
         ],

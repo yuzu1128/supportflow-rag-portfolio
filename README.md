@@ -10,7 +10,8 @@ It demonstrates document ingestion, hybrid retrieval, grounded answer generation
 - React/Vite frontend with Ask, Documents, Evaluation, and Logs tabs
 - Built-in sample documents for a fictional inquiry-management SaaS
 - Markdown, TXT, CSV, JSON, PDF, and DOCX ingestion strategy
-- Hybrid retrieval with keyword and vector-ready scoring
+- Paragraph-aware document chunking with chunk IDs in search citations
+- Hybrid chunk retrieval with keyword and vector-ready scoring
 - OpenRouter and local LLM provider abstraction
 - SQLite logs and metadata
 - RAG evaluation with Recall@k, MRR, citation rate, abstention accuracy, and keyword matching

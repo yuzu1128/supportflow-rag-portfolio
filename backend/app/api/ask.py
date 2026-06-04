@@ -30,6 +30,8 @@ def ask(request: AskRequest, store: SQLiteStore = Depends(get_store)) -> dict:
             title=result.document.title,
             score=result.score,
             snippet=result.snippet,
+            chunk_id=result.chunk_id,
+            chunk_index=result.chunk_index,
         )
         for result in filtered
     ]
